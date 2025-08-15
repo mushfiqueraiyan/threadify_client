@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/axiosSecure";
 import Swal from "sweetalert2";
+import useTheme from "../hooks/useTheme";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -11,7 +12,11 @@ const ManageUsers = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data: users = [], isFetching } = useQuery({
+  const {
+    data: users = [],
+    isFetching,
+    isLoading,
+  } = useQuery({
     queryKey: ["usersManage", searchTerm],
     queryFn: async () => {
       const res = await axiosSecure.get(`/usersManage?search=${searchTerm}`);
@@ -19,6 +24,12 @@ const ManageUsers = () => {
     },
     // optional: keepPreviousData: true,
   });
+
+  if (isLoading) {
+    <div className="flex inset-0 justify-center items-center">
+      <span className="loading loading-spinner loading-lg text-blue-400"></span>
+    </div>;
+  }
 
   const makeAdminMutation = useMutation({
     mutationFn: async (userId) => {
@@ -90,6 +101,8 @@ const ManageUsers = () => {
   const endIdx = startIdx + USER_PER_PAGE;
   const visibleUsers = users.slice(startIdx, endIdx);
 
+  const theme = useTheme();
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Manage Users</h1>
@@ -102,105 +115,114 @@ const ManageUsers = () => {
         className="input input-bordered w-full max-w-xs mb-4"
       />
 
-      {isFetching && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-50">
-          <span className="loading loading-spinner loading-lg text-blue-400"></span>
-        </div>
-      )}
+      <div className="overflow-x-auto   ">
+        <table className="min-w-full divide-y  divide-gray-200">
+          {isFetching ? (
+            <div className="flex justify-center items-center  h-100">
+              <span className="loading loading-spinner loading-lg text-blue-400"></span>
+            </div>
+          ) : (
+            <>
+              <thead className="border rounded-lg  border-gray-200">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    User
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Email
+                  </th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+                    Subscription
+                  </th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+                    Role
+                  </th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
 
-      <div className="overflow-x-auto rounded-lg border border-gray-200 shadow">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                User
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Email
-              </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
-                Subscription
-              </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
-                Role
-              </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {visibleUsers.length === 0 && searchTerm && !isFetching && (
-              <tr>
-                <td colSpan="4" className="text-center py-4 text-red-500">
-                  No users found
-                </td>
-              </tr>
-            )}
-            {visibleUsers.map((user) => (
-              <tr key={user._id} className="hover:bg-gray-50 transition">
-                <td className="px-6 py-4 whitespace-nowrap flex items-center space-x-3">
-                  <img
-                    src={
-                      user.photo ||
-                      "https://ui-avatars.com/api/?name=" + user.name
-                    }
-                    alt={user.name}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <div>
-                    <div className="text-sm font-medium text-gray-900">
-                      {user.name}
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      @{user.username}
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {user.email}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">
-                  <span
-                    className={`inline-block px-2 py-1 text-xs rounded-full ${
-                      user.badge === "Gold"
-                        ? "bg-yellow-100 text-yellow-800"
-                        : "bg-gray-100 text-gray-800"
-                    }`}
+              <tbody
+                className={` divide-y divide-gray-200 ${
+                  theme == "dark" ? "text-white" : ""
+                } border rounded-lg  border-gray-200`}
+              >
+                {visibleUsers.length === 0 && searchTerm && !isFetching && (
+                  <tr>
+                    <td colSpan="4" className="text-center py-4 text-red-500">
+                      No users found
+                    </td>
+                  </tr>
+                )}
+
+                {visibleUsers.map((user) => (
+                  <tr
+                    key={user._id}
+                    className="hover:bg-[#ffffff18] transition"
                   >
-                    {user.badge}
-                  </span>
-                </td>
-                <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-700">
-                  {user.role}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">
-                  {user.role === "admin" ? (
-                    <button
-                      onClick={() => handleRemoveAdmin(user._id)}
-                      className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded transition"
-                    >
-                      Remove Admin
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => handleMakeAdmin(user._id)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded transition"
-                    >
-                      Make Admin
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                    <td className="px-6 py-4 whitespace-nowrap flex items-center space-x-3">
+                      <img
+                        src={
+                          user.photo ||
+                          "https://ui-avatars.com/api/?name=" + user.name
+                        }
+                        alt={user.name}
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                      <div>
+                        <div className="text-sm font-medium ">{user.name}</div>
+                        <div className="text-sm text-gray-500">
+                          @{user.username}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm ">
+                      {user.email}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <span
+                        className={`inline-block px-2 py-1 text-xs rounded-full ${
+                          user.badge === "Gold"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-gray-100 text-gray-800"
+                        }`}
+                      >
+                        {user.badge}
+                      </span>
+                    </td>
+                    <td className="px-6 text-center py-4 whitespace-nowrap text-sm ">
+                      {user.role}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {user.role === "admin" ? (
+                        <button
+                          onClick={() => handleRemoveAdmin(user._id)}
+                          className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded transition"
+                        >
+                          Remove Admin
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleMakeAdmin(user._id)}
+                          className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded transition"
+                        >
+                          Make Admin
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </>
+          )}
         </table>
       </div>
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200">
+        <div className="flex items-center justify-between px-4 py-3   border-gray-200">
           {/* Summary */}
-          <div className="text-sm text-gray-700">
+          <div className="text-sm ">
             Showing{" "}
             <span className="font-medium">
               {startIdx + 1}-{Math.min(endIdx, totalUsers)}
@@ -213,7 +235,9 @@ const ManageUsers = () => {
             <button
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
-              className="px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50"
+              className={`px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50 ${
+                theme == "dark" ? "text-black" : ""
+              }`}
             >
               Prev
             </button>
@@ -225,8 +249,8 @@ const ManageUsers = () => {
                 className={`px-3 py-1  rounded ${
                   currentPage === i + 1
                     ? "bg-blue-300 text-white"
-                    : "bg-white hover:bg-gray-100"
-                }`}
+                    : "bg-white hover:bg-gray-100 text-black"
+                } cursor-pointer`}
               >
                 {i + 1}
               </button>
@@ -235,7 +259,9 @@ const ManageUsers = () => {
             <button
               onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50"
+              className={`px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50 ${
+                theme == "dark" ? "text-black" : ""
+              }`}
             >
               Next
             </button>

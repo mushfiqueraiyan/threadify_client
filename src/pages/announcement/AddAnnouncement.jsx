@@ -45,7 +45,7 @@ const AddAnnouncement = () => {
   };
 
   return (
-    <section className=" p-6 bg-white rounded-lg ">
+    <section className=" p-6 rounded-lg ">
       <h1 className="text-2xl font-bold mb-4 text-center">Make Announcement</h1>
 
       <div className="flex items-center gap-3 mb-6  pb-4 ">
@@ -55,7 +55,7 @@ const AddAnnouncement = () => {
           className="w-12 h-12 rounded-full object-cover border"
         />
         <div>
-          <p className="font-medium text-gray-900">{user?.displayName}</p>
+          <p className="font-medium ">{user?.displayName}</p>
           <p className="text-xs text-gray-500">
             You're posting this announcement
           </p>

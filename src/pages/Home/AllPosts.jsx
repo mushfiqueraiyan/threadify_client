@@ -64,8 +64,8 @@ const AllPosts = () => {
       </div>
 
       {isLoading || isFetching ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-50">
-          <span className="loading loading-spinner loading-lg text-blue-400"></span>
+        <div className="text-center flex justify-center items-center h-100">
+          <span className="loading text-center loading-spinner loading-lg text-blue-400"></span>
         </div>
       ) : isError ? (
         <p className="text-red-500 text-center">Error: {error.message}</p>
@@ -73,7 +73,7 @@ const AllPosts = () => {
         <div className="flex flex-wrap justify-center gap-3 ">
           {posts.map((post) => (
             <Link key={post._id} to={`/posts/${post._id}`}>
-              <div className="bg-white w-100 border border-[#8fb8ffb4] rounded-lg shadow-sm p-4 flex flex-col gap-3 hover:shadow-md transition">
+              <div className="w-100 border border-[#8fb8ffb4] rounded-lg shadow-sm p-4 flex flex-col gap-3 hover:shadow-md transition">
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <img
@@ -99,14 +99,12 @@ const AllPosts = () => {
                   </div>
                 </div>
 
-                <h2 className="text-xl font-bold text-gray-700">
-                  {post.postTitle}
-                </h2>
-                <p className="text-gray-600 line-clamp-3">
+                <h2 className="text-xl font-bold ">{post.postTitle}</h2>
+                <p className="text-gray-500 line-clamp-3">
                   {post.postDescription}
                 </p>
 
-                <div className="flex justify-between items-center mt-3 text-gray-700 text-sm">
+                <div className="flex justify-between items-center mt-3  text-sm">
                   <div className="flex items-center gap-1">
                     <MessageCircle size={16} /> {post.commentsCount ?? 0}
                   </div>

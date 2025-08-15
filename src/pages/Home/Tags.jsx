@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../hooks/axiosSecure";
+import useTheme from "../../hooks/useTheme";
 
 const TagsSection = () => {
   const axiosSecure = useAxiosSecure();
-
+  const theme = useTheme();
   const { data: tags = [], isLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
@@ -22,11 +23,13 @@ const TagsSection = () => {
   }
 
   return (
-    <section className="relative py-12 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-[#f0f6ff] to-white overflow-hidden">
+    <section
+      className={`relative py-12 px-4 md:px-8 lg:px-16 ${
+        theme == "light" ? "bg-gradient-to-b from-[#f0f6ff] to-white" : ""
+      } overflow-hidden`}
+    >
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-          Available Tags
-        </h2>
+        <h2 className="text-4xl md:text-5xl font-bold  mb-4">Available Tags</h2>
         <p className="text-gray-500 mb-8 max-w-2xl mx-auto">
           Explore and discover popular technologies and topics to boost your
           posts!
@@ -47,7 +50,11 @@ const TagsSection = () => {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+      <div
+        className={`absolute inset-x-0 bottom-0 h-32 ${
+          theme == "light" ? "bg-gradient-to-t from-white to-transparent" : ""
+        } pointer-events-none`}
+      ></div>
     </section>
   );
 };

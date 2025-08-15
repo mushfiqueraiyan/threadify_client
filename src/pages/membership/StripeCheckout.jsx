@@ -64,7 +64,7 @@ const StripeCheckout = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <CardElement className="border p-3 rounded" />
+        <CardElement className="border p-3 rounded " />
         <button
           type="submit"
           disabled={!stripe || loading}

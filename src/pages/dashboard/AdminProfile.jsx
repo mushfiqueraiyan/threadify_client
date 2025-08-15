@@ -171,22 +171,20 @@ const AdminProfile = () => {
   return (
     <div className="p-6 space-y-8">
       {/* Profile */}
-      <div className="bg-white rounded-lg p-6 flex items-center space-x-4 shadow">
+      <div className="rounded-lg p-6 flex items-center space-x-4 shadow">
         <img
           src={userProfile?.photo || "https://via.placeholder.com/150"}
           alt={userProfile?.name}
           className="w-24 h-24 rounded-full object-cover border"
         />
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">
-            {userProfile?.name}
-          </h2>
-          <p className="text-gray-600">{userProfile?.email}</p>
+          <h2 className="text-2xl font-bold ">{userProfile?.name}</h2>
+          <p className="text-gray-500">{userProfile?.email}</p>
         </div>
       </div>
 
       {/* Add Tag */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className=" rounded-lg shadow p-6">
         <h3 className="text-xl font-bold mb-4">Add New Tag</h3>
         <form onSubmit={handleAddTag} className="flex space-x-2">
           <input
@@ -237,7 +235,7 @@ const AdminProfile = () => {
       </div>
 
       {/* Pie Chart */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="rounded-lg shadow p-6">
         <h3 className="text-xl font-bold mb-4">Site-Wide Stats</h3>
         <div className="w-full h-[400px]">
           <ResponsiveContainer>

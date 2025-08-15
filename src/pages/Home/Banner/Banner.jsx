@@ -35,7 +35,7 @@ const Banner = () => {
       ></div>
 
       {/* Overlay */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center py-16 md:py-24 px-4 backdrop-blur-sm bg-white/60">
+      <div className="relative z-1 flex flex-col items-center justify-center text-center py-16 md:py-24 px-4 backdrop-blur-sm bg-white/60">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-3 tracking-tight">
           Your Forum Community
         </h1>
@@ -49,7 +49,7 @@ const Banner = () => {
             placeholder="Search topics, tags, or posts..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full text-lg pl-12 py-4 rounded-full border border-gray-200 shadow focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition placeholder-gray-400 bg-white/80 backdrop-blur-md"
+            className="w-full text-lg pl-12 py-4 text-black rounded-full border border-gray-200 shadow focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition placeholder-gray-400 bg-white/80 backdrop-blur-md"
           />
           <Search
             className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"

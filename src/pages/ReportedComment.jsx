@@ -2,11 +2,13 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/axiosSecure";
+import useTheme from "../hooks/useTheme";
 
 const ReportedComment = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const REPORT_PER_PAGE = 10;
   const axiosSecure = useAxiosSecure();
+  const theme = useTheme();
   const queryClient = useQueryClient();
 
   const { data: reportedComments = [], isLoading } = useQuery({
@@ -96,9 +98,9 @@ const ReportedComment = () => {
       )}
       {/* Pagination */}
 
-      <div className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200">
+      <div className="flex items-center justify-between px-4 py-3  border-t border-gray-200">
         {/* Summary */}
-        <div className="text-sm text-gray-700">
+        <div className="text-sm text-gray-500">
           Showing{" "}
           <span className="font-medium">
             {startIdx + 1}-{Math.min(endIdx, totalReport)}
@@ -111,7 +113,9 @@ const ReportedComment = () => {
           <button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
-            className="px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50"
+            className={`px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50 ${
+              theme == "dark" ? "text-black" : ""
+            }`}
           >
             Prev
           </button>
@@ -133,7 +137,9 @@ const ReportedComment = () => {
           <button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50"
+            className={`px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50 ${
+              theme == "dark" ? "text-black" : ""
+            }`}
           >
             Next
           </button>

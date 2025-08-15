@@ -30,9 +30,7 @@ const Announcement = () => {
   return (
     <section className="max-w-7xl mx-auto p-4 md:p-8">
       <header className="flex items-center justify-between mb-6 border-b pb-4 border-[#c4daff]">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Announcements
-        </h1>
+        <h1 className="text-2xl md:text-3xl font-bold ">Announcements</h1>
       </header>
 
       <ul
@@ -46,7 +44,7 @@ const Announcement = () => {
         {announcements.map((a) => (
           <li
             key={a._id}
-            className="bg-white border border-[#c4daff] rounded-lg shadow-sm p-6"
+            className=" border border-[#c4daff] rounded-lg shadow-sm p-6"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 mb-4">
@@ -58,7 +56,7 @@ const Announcement = () => {
                   className="w-10 h-10 rounded-full object-cover border"
                 />
                 <div>
-                  <p className="font-medium text-gray-900">{a.authorName}</p>
+                  <p className="font-medium ">{a.authorName}</p>
                   <p className="text-xs text-gray-500">
                     {new Date(a.createdAt).toLocaleString()}
                   </p>
@@ -76,7 +74,7 @@ const Announcement = () => {
             <h2 className="text-lg md:text-xl font-bold text-[#69a0ff] mb-2">
               {a.title}
             </h2>
-            <p className="text-gray-800 whitespace-pre-line leading-relaxed">
+            <p className="text-gray-500 whitespace-pre-line leading-relaxed">
               {a.description}
             </p>
           </li>

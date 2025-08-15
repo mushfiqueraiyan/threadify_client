@@ -1,15 +1,34 @@
-import React, { useEffect } from "react";
-import { Bell, LogOut, Menu } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Bell, LogOut, Menu, Moon, Sun } from "lucide-react";
 import logo from "../../assets/logo.png";
 import useAuth from "../../hooks/useAuth";
 import { Link, NavLink } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/axiosSecure";
+import useTheme from "../../hooks/useTheme";
 
 const Navbar = () => {
   const { user, logout, setUser } = useAuth();
+  const [darkMode, setDarkMode] = useState(false);
   const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme") || "dark";
+    const isDark = saved === "dark";
+    setDarkMode(isDark);
+    document.documentElement.setAttribute("data-theme", saved);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = darkMode ? "light" : "dark";
+    setDarkMode(!darkMode);
+    localStorage.setItem("theme", nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
+
+    // This event makes all components update theme state!
+    window.dispatchEvent(new Event("themeChange"));
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -25,10 +44,11 @@ const Navbar = () => {
     },
   });
 
+  const theme = useTheme();
   //  console.log("API Response:", countData);
 
   return (
-    <div className="navbar bg-base-100  px-4">
+    <div className="navbar bg-[#bad4ff] text-black  px-4">
       {/* Start */}
       <div className="navbar-start">
         {/* Mobile Hamburger */}
@@ -112,10 +132,14 @@ const Navbar = () => {
 
       {/* End */}
       <div className="navbar-end gap-2">
+        <button className="cursor-pointer transition-all" onClick={toggleTheme}>
+          {darkMode ? <Sun size={25} /> : <Moon size={25} />}
+        </button>
+
         <div className="btn btn-ghost btn-circle relative">
           <Bell size={22} />
 
-          <span className="badge bg-[#bfd6ff] badge-xs absolute -top-1 -right-1">
+          <span className="badge  badge-xs absolute -top-1 -right-1">
             {countData?.count}
           </span>
         </div>
@@ -141,12 +165,14 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm  mt-3 dropdown-content  z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52"
+              className={`menu menu-sm  mt-3 dropdown-content  z-[1] p-2 shadow-lg  rounded-box w-52 ${
+                theme == "dark" ? "bg-gray-800" : "bg-white"
+              }`}
             >
               <li className="text-gray-500 font-semibold cursor-default">
                 {user.displayName || user.email}
               </li>
-              <li className="my-2">
+              <li className={`my-2 ${theme == "dark" ? "text-white" : ""}`}>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>

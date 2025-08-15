@@ -11,9 +11,11 @@ import {
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import useUserRole from "../hooks/useUserRole";
+import useTheme from "../hooks/useTheme";
 
 const DashboardLayout = () => {
   const { userRole } = useUserRole();
+  const theme = useTheme();
 
   return (
     <div>
@@ -21,7 +23,7 @@ const DashboardLayout = () => {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <div className="navbar bg-[#c4daff] w-full lg:hidden">
+          <div className={`navbar bg-[#c4daff] text-black w-full lg:hidden`}>
             <div className="flex-none ">
               <label
                 htmlFor="my-drawer-2"
@@ -43,7 +45,9 @@ const DashboardLayout = () => {
                 </svg>
               </label>
             </div>
-            <div className="mx-2 flex-1 px-2 lg:hidden">Dashboard</div>
+            <div className="mx-2 flex-1 px-2 lg:hidden text-black">
+              Dashboard
+            </div>
           </div>
           {/* Page content here */}
           <Outlet />
@@ -55,13 +59,19 @@ const DashboardLayout = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-[#c4daff] text-black min-h-full w-80 p-4">
+          <ul
+            className={`menu ${
+              theme == "dark"
+                ? "text-white bg-[#121212] border-r-1 border-gray-700"
+                : "bg-[#c4daff] "
+            } text-black min-h-full w-80 p-4`}
+          >
             <li>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
                   `flex items-center gap-2 hover:text-blue-600 transition ${
-                    isActive ? "bg-gray-100" : ""
+                    isActive ? "bg-gray-100 text-blue-600" : ""
                   }`
                 }
               >
@@ -88,7 +98,7 @@ const DashboardLayout = () => {
                     to="/dashboard/add-post"
                     className={({ isActive }) =>
                       `flex items-center gap-2 hover:text-blue-600 transition ${
-                        isActive ? "bg-gray-100" : ""
+                        isActive ? "bg-gray-100 text-blue-600" : ""
                       }`
                     }
                   >
@@ -102,7 +112,7 @@ const DashboardLayout = () => {
                     to="/dashboard/my-posts"
                     className={({ isActive }) =>
                       `flex items-center gap-2 hover:text-blue-600 transition ${
-                        isActive ? "bg-gray-100" : ""
+                        isActive ? "bg-gray-100 text-blue-600" : ""
                       }`
                     }
                   >
@@ -135,7 +145,7 @@ const DashboardLayout = () => {
                     to="/dashboard/add-announcement"
                     className={({ isActive }) =>
                       `flex items-center gap-2 hover:text-blue-600 transition ${
-                        isActive ? "bg-gray-100" : ""
+                        isActive ? "bg-gray-100 text-blue-600" : ""
                       }`
                     }
                   >
@@ -148,7 +158,7 @@ const DashboardLayout = () => {
                     to="/dashboard/manage-users"
                     className={({ isActive }) =>
                       `flex items-center gap-2 hover:text-blue-600 transition ${
-                        isActive ? "bg-gray-100" : ""
+                        isActive ? "bg-gray-100 text-blue-600" : ""
                       }`
                     }
                   >
@@ -161,7 +171,7 @@ const DashboardLayout = () => {
                     to="/dashboard/reported-comments"
                     className={({ isActive }) =>
                       `flex items-center gap-2 hover:text-blue-600 transition ${
-                        isActive ? "bg-gray-100" : ""
+                        isActive ? "bg-gray-100 text-blue-600" : ""
                       }`
                     }
                   >

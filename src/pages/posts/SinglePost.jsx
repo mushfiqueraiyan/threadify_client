@@ -112,7 +112,7 @@ const SinglePost = () => {
 
   return (
     <div className="p-8">
-      <section className="max-w-7xl mx-auto p-4 md:p-8  bg-white rounded-lg shadow ">
+      <section className="max-w-7xl mx-auto p-4 md:p-8   rounded-lg shadow ">
         {/* Author Header */}
         <header className="flex items-center gap-3 border-b border-b-[#c4daff] pb-4 mb-4">
           <img
@@ -121,18 +121,16 @@ const SinglePost = () => {
             className="w-10 h-10 rounded-full object-cover border"
           />
           <div>
-            <p className="font-medium text-gray-900">{authorName}</p>
+            <p className="font-medium ">{authorName}</p>
             <p className="text-xs text-gray-500">{formattedDate}</p>
           </div>
         </header>
 
         {/* Title */}
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-          {postTitle}
-        </h1>
+        <h1 className="text-2xl md:text-3xl font-bold  mb-3">{postTitle}</h1>
 
         {/* Description */}
-        <p className="text-gray-800 whitespace-pre-line mb-4 leading-relaxed">
+        <p className="text-gray-400 whitespace-pre-line mb-4 leading-relaxed">
           {displayedText}
 
           {isLong && (
@@ -153,7 +151,7 @@ const SinglePost = () => {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-between border-t border-t-[#c4daff] pt-4 mt-6 text-gray-600 text-sm">
+        <div className="flex items-center justify-between border-t border-t-[#c4daff] pt-4 mt-6  text-sm">
           {user ? (
             <>
               <div className="flex gap-4">
@@ -210,7 +208,7 @@ const SinglePost = () => {
 
         {/* Comments Section */}
         <section className="mt-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Comments</h2>
+          <h2 className="text-lg font-semibold mb-4">Comments</h2>
 
           {user?.email ? (
             <form
@@ -249,7 +247,7 @@ const SinglePost = () => {
               {comments.map((c) => (
                 <div
                   key={c._id}
-                  className="flex mt-3 items-center gap-2 bg-[#ebf3ffd0] p-2 rounded-2xl"
+                  className="flex mt-3 items-center gap-2 bg-blue-100 p-2 rounded-2xl"
                 >
                   <div>
                     <img src={c.photo} className="w-10 h-10 rounded-full" />
@@ -257,7 +255,7 @@ const SinglePost = () => {
                   <div>
                     <li className="py-4">
                       <div className="flex items-center gap-2">
-                        <p className="font-bold">{c.name}</p>{" "}
+                        <p className="font-bold text-black">{c.name}</p>{" "}
                         <p className="text-xs text-gray-500 mt-1">
                           {new Date(c.createdAt).toLocaleString()}
                         </p>

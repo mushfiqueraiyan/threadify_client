@@ -1,5 +1,6 @@
 import { FacebookIcon, Linkedin, TwitterIcon, YoutubeIcon } from "lucide-react";
 import React from "react";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -17,10 +18,15 @@ const Footer = () => {
         <div className="divider my-4"></div>
 
         <nav className="flex flex-wrap justify-center gap-6 text-sm mb-4">
-          <a className="link link-hover">About Us</a>
-          <a className="link link-hover">Pricing</a>
-          <a className="link link-hover">Blog</a>
-          <a className="link link-hover">Contact</a>
+          <Link to={"/"} className="link link-hover">
+            Home
+          </Link>
+          <Link to={"/about"} className="link link-hover">
+            About
+          </Link>
+          <Link to={"/membership"} className="link link-hover">
+            Membership
+          </Link>
         </nav>
 
         <div className="divider my-4"></div>

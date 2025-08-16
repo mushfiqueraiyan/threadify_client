@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  Bar,
+  BarChart,
+  CartesianGrid,
   Cell,
   Legend,
   Pie,
@@ -8,6 +11,8 @@ import {
   ResponsiveContainer,
   Sector,
   Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/axiosSecure";
@@ -183,6 +188,76 @@ const AdminProfile = () => {
         </div>
       </div>
 
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-3 text-gray-700">
+        <div className="p-10 bg-orange-400 rounded-2xl text-xl text-white">
+          Posts: {siteStats.totalPosts ?? 0}
+        </div>
+        <div className="p-10 bg-purple-400 rounded-2xl text-xl text-white">
+          Comments: {siteStats.totalComments ?? 0}
+        </div>
+        <div className="p-10 bg-blue-400 rounded-2xl text-xl text-white">
+          Total Users: {siteStats.totalUsers ?? 0}
+        </div>
+      </div>
+
+      {/* Pie Chart */}
+      <div className="rounded-lg shadow p-6">
+        <h3 className="text-xl font-bold mb-4">Site-Wide Stats</h3>
+        <div className="w-full h-[700px] lg:h-[400px] grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+          <div>
+            <ResponsiveContainer>
+              <PieChart>
+                <Pie
+                  activeShape={renderActiveShape}
+                  data={pieData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={100}
+                  outerRadius={140}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {pieData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={[
+                  {
+                    name: "Site Stats",
+                    Posts: siteStats.totalPosts ?? 0,
+                    Comments: siteStats.totalComments ?? 0,
+                    Users: siteStats.totalUsers ?? 0,
+                  },
+                ]}
+                margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="Posts" fill="#3b82f6" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="Comments" fill="#f59e0b" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="Users" fill="#10b981" radius={[6, 6, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
       {/* Add Tag */}
       <div className=" rounded-lg shadow p-6">
         <h3 className="text-xl font-bold mb-4">Add New Tag</h3>
@@ -218,49 +293,6 @@ const AdminProfile = () => {
               ))}
             </div>
           )}
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-gray-700">
-        <div className="p-10 bg-orange-400 rounded-2xl text-xl text-white">
-          Posts: {siteStats.totalPosts ?? 0}
-        </div>
-        <div className="p-10 bg-purple-400 rounded-2xl text-xl text-white">
-          Comments: {siteStats.totalComments ?? 0}
-        </div>
-        <div className="p-10 bg-blue-400 rounded-2xl text-xl text-white">
-          Total Users: {siteStats.totalUsers ?? 0}
-        </div>
-      </div>
-
-      {/* Pie Chart */}
-      <div className="rounded-lg shadow p-6">
-        <h3 className="text-xl font-bold mb-4">Site-Wide Stats</h3>
-        <div className="w-full h-[400px]">
-          <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                activeShape={renderActiveShape}
-                data={pieData}
-                cx="50%"
-                cy="50%"
-                innerRadius={100}
-                outerRadius={140}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {pieData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
         </div>
       </div>
     </div>

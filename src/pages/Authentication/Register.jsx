@@ -185,35 +185,35 @@ const Register = () => {
               </div>
             </div>
 
-            <label className="label">Full Name</label>
+            <label className="label text-black">Full Name</label>
             <input
               {...register("name", { required: "Name is required" })}
               placeholder="Full Name"
-              className="w-full px-4 py-2 border border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border text-black border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {errors.name && (
               <p className="text-red-500 text-sm">{errors.name.message}</p>
             )}
-            <label className="label">Username</label>
+            <label className="label text-black">Username</label>
             <input
               {...register("username", { required: "username is required" })}
               placeholder="username"
-              className="w-full px-4 py-2 border border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border text-black border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {errors.username && (
               <p className="text-red-500 text-sm">{errors.username.message}</p>
             )}
-            <label className="label">Email</label>
+            <label className="label text-black">Email</label>
             <input
               {...register("email", { required: "Email is required" })}
               placeholder="Email"
               type="email"
-              className="w-full px-4 py-2 border border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border text-black border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>
             )}
-            <label className="label">Password</label>
+            <label className="label text-black">Password</label>
             <input
               {...register("password", {
                 required: "Password is required",
@@ -236,7 +236,7 @@ const Register = () => {
               })}
               placeholder="Password"
               type="password"
-              className="w-full px-4 py-2 border border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border text-black border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password.message}</p>

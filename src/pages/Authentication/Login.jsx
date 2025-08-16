@@ -67,18 +67,18 @@ const Login = () => {
           <div className="w-full lg:w-1/2 p-10 flex flex-col  justify-center">
             <h2 className="text-5xl font-bold text-gray-800 mb-6">Join us</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-              <label className="label">Email</label>
+              <label className="label text-black">Email</label>
               <input
                 {...register("email", { required: "Email is required" })}
                 placeholder="Email"
                 type="email"
                 defaultValue={"admin@admin.com"}
-                className="w-full px-4 py-2 border border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 border text-black border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email.message}</p>
               )}
-              <label className="label">Password</label>
+              <label className="label text-black">Password</label>
               <input
                 {...register("password", {
                   required: "Password is required",
@@ -86,7 +86,7 @@ const Login = () => {
                 placeholder="Password"
                 type="password"
                 defaultValue={"Admin123456**"}
-                className="w-full px-4 py-2 border border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 border text-black border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               {errors.password && (
                 <p className="text-red-500 text-sm">
@@ -122,7 +122,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={googleLogin}
-                className=" cursor-pointer btn bg-none w-full flex items-center justify-center gap-2  hover:border-gray-300 transition"
+                className=" cursor-pointer bg-white text-black btn bg-none w-full flex items-center justify-center gap-2  hover:border-gray-300 transition"
               >
                 <img
                   src="https://www.svgrepo.com/show/475656/google-color.svg"

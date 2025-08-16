@@ -16,8 +16,8 @@ const Navbar = () => {
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme") || "dark";
-    const isDark = saved === "dark";
+    const saved = localStorage.getItem("theme") || "light";
+    const isDark = saved === "light";
     setDarkMode(isDark);
     document.documentElement.setAttribute("data-theme", saved);
   }, []);

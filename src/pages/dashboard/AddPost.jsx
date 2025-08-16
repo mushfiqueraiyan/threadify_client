@@ -68,8 +68,8 @@ const AddPost = () => {
   const hasReachedLimit = userData !== "Gold" && postCount >= 5;
 
   return (
-    <div className="p-6 sm:p-8 bg-white rounded-2xl shadow-lg">
-      <h2 className="text-3xl font-extrabold text-center text-gray-900 mb-8">
+    <div className="p-6 sm:p-8  rounded-2xl shadow-lg">
+      <h2 className="text-3xl font-extrabold text-center  mb-8">
         Add New Post
       </h2>
 
@@ -116,7 +116,7 @@ const AddPost = () => {
             value={user?.email || ""}
             {...register("authorEmail")}
             readOnly
-            className="w-full rounded-lg border px-4 py-3 bg-gray-100 cursor-not-allowed"
+            className="w-full rounded-lg border px-4 py-3  cursor-not-allowed"
           />
         </div>
 
@@ -191,7 +191,7 @@ const AddPost = () => {
               {...register("upVote")}
               value={0}
               readOnly
-              className="w-full rounded-lg border px-4 py-3 bg-gray-100 cursor-not-allowed"
+              className="w-full rounded-lg border px-4 py-3  cursor-not-allowed"
             />
           </div>
           <div>
@@ -203,7 +203,7 @@ const AddPost = () => {
               {...register("downVote")}
               value={0}
               readOnly
-              className="w-full rounded-lg border px-4 py-3 bg-gray-100 cursor-not-allowed"
+              className="w-full rounded-lg border px-4 py-3  cursor-not-allowed"
             />
           </div>
         </div>

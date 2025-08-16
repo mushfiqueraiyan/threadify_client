@@ -3,6 +3,7 @@ import Banner from "./Banner/Banner";
 import TagsSection from "./Tags";
 import AllPosts from "./AllPosts";
 import Announcement from "./Announcement";
+import Feature from "./Feature";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <TagsSection />
       <Announcement />
       <AllPosts />
+      <Feature />
     </div>
   );
 };

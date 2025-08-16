@@ -72,6 +72,7 @@ const Login = () => {
                 {...register("email", { required: "Email is required" })}
                 placeholder="Email"
                 type="email"
+                defaultValue={"admin@admin.com"}
                 className="w-full px-4 py-2 border border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               {errors.email && (
@@ -84,6 +85,7 @@ const Login = () => {
                 })}
                 placeholder="Password"
                 type="password"
+                defaultValue={"Admin123456**"}
                 className="w-full px-4 py-2 border border-[#E0EAFB] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               {errors.password && (

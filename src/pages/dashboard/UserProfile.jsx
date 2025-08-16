@@ -38,7 +38,7 @@ const UserProfile = () => {
   const badgeColor = badge === "Gold" ? "text-yellow-500" : "text-orange-400";
 
   return (
-    <div className=" bg-white   overflow-hidden">
+    <div className="    overflow-hidden">
       {/* Cover / Banner */}
       <div className="relative h-40 bg-gradient-to-r from-blue-500 to-indigo-600">
         <img
@@ -59,9 +59,7 @@ const UserProfile = () => {
           className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
         />
 
-        <h2 className="mt-4 text-2xl font-bold text-gray-800">
-          {userProfile.name}
-        </h2>
+        <h2 className="mt-4 text-2xl font-bold ">{userProfile.name}</h2>
         <p className="text-gray-500">{userProfile.email}</p>
 
         <div className="flex items-center mt-2 space-x-2">
@@ -77,7 +75,7 @@ const UserProfile = () => {
 
       {/* Recent Posts */}
       <div className="p-6 max-w-7xl mx-auto">
-        <h3 className="text-xl font-bold text-gray-800 mb-4">Recent Posts</h3>
+        <h3 className="text-xl font-bold  mb-4">Recent Posts</h3>
 
         {userPosts.length === 0 ? (
           <p className="text-gray-500">No posts yet.</p>
@@ -85,7 +83,7 @@ const UserProfile = () => {
           <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-1">
             {userPosts.slice(0, 3).map((post) => (
               <Link key={post._id} to={`/posts/${post._id}`}>
-                <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
+                <div className=" border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-4">
                   {/* Top section: User Info */}
                   <div className="flex items-center mb-4">
                     <img
@@ -94,7 +92,7 @@ const UserProfile = () => {
                       className="w-10 h-10 rounded-full object-cover border"
                     />
                     <div className="ml-3">
-                      <p className="text-sm font-semibold text-gray-800">
+                      <p className="text-sm font-semibold ">
                         {post.authorName}
                       </p>
                       <p className="text-xs text-gray-400">
@@ -106,10 +104,10 @@ const UserProfile = () => {
                   </div>
 
                   {/* Post Content */}
-                  <h4 className="font-semibold text-lg text-gray-800 mb-2">
+                  <h4 className="font-semibold text-lg  mb-2">
                     {post.postTitle}
                   </h4>
-                  <p className="text-gray-600 mb-3">{post.postDescription}</p>
+                  <p className="text-gray-500 mb-3">{post.postDescription}</p>
                 </div>
               </Link>
             ))}

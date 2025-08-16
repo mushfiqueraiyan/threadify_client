@@ -6,10 +6,12 @@ import Swal from "sweetalert2";
 
 import toast from "react-hot-toast";
 import { Link } from "react-router";
+import useTheme from "../../hooks/useTheme";
 
 const MyPosts = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const POSTS_PER_PAGE = 10;
 
@@ -57,7 +59,7 @@ const MyPosts = () => {
     if (!result.isConfirmed) return;
 
     const res = await axiosSecure.delete(`/posts/${id}`);
-    console.log(res);
+    //console.log(res);
 
     toast.error(res.data.message);
   };
@@ -80,7 +82,7 @@ const MyPosts = () => {
         ) : (
           <div className="overflow-x-auto rounded-lg shadow ">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+              <thead className="">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Post Title
@@ -96,11 +98,14 @@ const MyPosts = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className=" divide-y divide-gray-200">
                 {visiblePosts.map((post) => (
-                  <tr key={post._id} className="hover:bg-gray-50 transition">
+                  <tr
+                    key={post._id}
+                    className="hover:bg-[#ffffff25] transition"
+                  >
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm font-medium ">
                         {post.postTitle}
                       </div>
                       <div className="text-sm text-gray-500">{post.tag}</div>
@@ -146,7 +151,7 @@ const MyPosts = () => {
           <>
             {/* Pagination */}
 
-            <div className="flex items-center justify-between px-4 py-3 mt-5 bg-white  border-gray-200">
+            <div className="flex items-center justify-between px-4 py-3 mt-5   border-gray-200">
               {/* Summary */}
               <div className="text-sm text-gray-700">
                 Showing{" "}
@@ -161,7 +166,9 @@ const MyPosts = () => {
                 <button
                   onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                   disabled={currentPage === 1}
-                  className="px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50"
+                  className={`px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50 ${
+                    theme == "dark" ? "text-black" : ""
+                  }`}
                 >
                   Prev
                 </button>
@@ -185,7 +192,9 @@ const MyPosts = () => {
                     setCurrentPage((p) => Math.min(p + 1, totalPages))
                   }
                   disabled={currentPage === totalPages}
-                  className="px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50"
+                  className={`px-3 py-1 cursor-pointer rounded bg-gray-100 disabled:opacity-50 ${
+                    theme == "dark" ? "text-black" : ""
+                  }`}
                 >
                   Next
                 </button>

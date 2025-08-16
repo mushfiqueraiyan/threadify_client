@@ -18,6 +18,7 @@ import Forbidden from "../pages/Forbidden";
 import AdminRoute from "./AdminRoute";
 import StripeCheckout from "../pages/membership/StripeCheckout";
 import Pricing from "../pages/membership/Pricing";
+import About from "../pages/about/About";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/forbidden",
         element: <Forbidden />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },

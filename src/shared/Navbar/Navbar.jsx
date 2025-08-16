@@ -7,10 +7,12 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/axiosSecure";
 import useTheme from "../../hooks/useTheme";
+import useUserRole from "../../hooks/useUserRole";
 
 const Navbar = () => {
   const { user, logout, setUser } = useAuth();
   const [darkMode, setDarkMode] = useState(false);
+  const { userRole } = useUserRole();
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
@@ -128,6 +130,18 @@ const Navbar = () => {
         >
           Membership
         </NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "border-b-2 border-yellow-400 animate-pulse"
+              : isActive
+              ? "border-b-2 border-blue-400"
+              : ""
+          }
+          to="/about"
+        >
+          About
+        </NavLink>
       </div>
 
       {/* End */}
@@ -165,16 +179,28 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className={`menu menu-sm  mt-3 dropdown-content  z-[1] p-2 shadow-lg  rounded-box w-52 ${
+              className={`menu menu-sm space-y-2 mt-3 dropdown-content  z-[1] p-2 shadow-lg  rounded-box w-52 ${
                 theme == "dark" ? "bg-gray-800" : "bg-white"
               }`}
             >
               <li className="text-gray-500 font-semibold cursor-default">
                 {user.displayName || user.email}
               </li>
-              <li className={`my-2 ${theme == "dark" ? "text-white" : ""}`}>
+              <li className={` ${theme == "dark" ? "text-white" : ""}`}>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
+              {userRole == "admin" && (
+                <li className={` ${theme == "dark" ? "text-white" : ""}`}>
+                  <Link to={"/dashboard/add-announcement"}>
+                    Add Announcement
+                  </Link>
+                </li>
+              )}
+              {userRole == "user" && (
+                <li className={` ${theme == "dark" ? "text-white" : ""}`}>
+                  <Link to={"/dashboard/add-post"}>Add Post</Link>
+                </li>
+              )}
               <li>
                 <button
                   className="flex bg-red-500 rounded-3xl text-white items-center gap-2"

@@ -64,7 +64,7 @@ const DashboardLayout = () => {
               theme == "dark"
                 ? "text-white bg-[#121212] border-r-1 border-gray-700"
                 : "bg-[#c4daff] "
-            } text-black min-h-full w-80 p-4`}
+            } text-black min-h-full w-80 p-4 space-y-3`}
           >
             <li>
               <NavLink

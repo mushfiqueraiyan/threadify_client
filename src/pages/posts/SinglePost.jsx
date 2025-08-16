@@ -46,7 +46,7 @@ const SinglePost = () => {
     ? new Date(create_at).toLocaleString()
     : "Unknown time";
 
-  const shareUrl = `http://localhost:5173/posts/${_id}`;
+  const shareUrl = `https://askthreadify.netlify.app/posts/${_id}`;
 
   const { data: comments = [], refetch } = useQuery({
     queryKey: ["comments", _id],

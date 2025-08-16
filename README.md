@@ -1,6 +1,6 @@
 # Threadify
 
-**Live Demo:** https://threadify-client.netlify.app/
+**Live Demo:** https://askthreadify.netlify.app/
 
 ---
 
